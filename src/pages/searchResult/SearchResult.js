@@ -17,28 +17,26 @@ const SearchResult = () => {
   const [pageNum, setPageNum] = useState(1);
   const [loading, setLoading] = useState(false);
 
-  console.log(pageNum);
-  console.log(data);
-  console.log(loading);
+  // console.log(pageNum);
+  // console.log(data);
+  // console.log(loading);
 
   const fetchInitialData = () => {
     setLoading(true);
-    fetchDataFromApi(`/search/multi?query=${query}&page=${pageNum}`).then(
-      (res) => {
-        // console.log(res);
-        setData(res);
-        setPageNum((prev) => prev + 1);
-        setLoading(false);
-      }
-    );
+    fetchDataFromApi(`/search/multi`, { query: query }).then((res) => {
+      // console.log(res);
+      setData(res);
+      setPageNum((prev) => prev + 1);
+      setLoading(false);
+    });
   };
 
   const fetchNextPageData = () => {
-    fetchDataFromApi(`/search/multi?query=${query}&page=${pageNum}`).then(
+    fetchDataFromApi(`/search/multi`, { page: pageNum, query: query }).then(
       (res) => {
         setData((data) => {
           if (data?.results) {
-            return { ...res, results: [...res.results, ...data.results] };
+            return { ...res, results: [...data.results, ...res.results] };
           } else {
             return res;
           }
@@ -50,7 +48,7 @@ const SearchResult = () => {
   };
 
   useEffect(() => {
-    console.log("hi");
+    // console.log("hi");
     setPageNum(1);
     fetchInitialData();
   }, [query]);

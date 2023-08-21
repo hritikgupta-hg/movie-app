@@ -11,8 +11,6 @@ import ContentWrapper from "../../components/contentWrapper/ContentWrapper";
 import MovieCard from "../../components/movieCard/MovieCard";
 import Spinner from "../../components/spinner/Spinner";
 
-let filters = {};
-
 const sortbyData = [
   { value: "popularity.desc", label: "Popularity Descending" },
   { value: "popularity.asc", label: "Popularity Ascending" },
@@ -36,6 +34,9 @@ const Explore = () => {
 
   const { data: genresData } = useFetch(`/genre/${mediaType}/list`);
 
+  let filters = { page: pageNum };
+  // console.log(pageNum);
+  // console.log(data);
   const fetchInitialData = () => {
     setLoading(true);
     fetchDataFromApi(`/discover/${mediaType}`, filters).then((res) => {
@@ -46,19 +47,18 @@ const Explore = () => {
   };
 
   const fetchNextPageData = () => {
-    fetchDataFromApi(`/discover/${mediaType}?page=${pageNum}`, filters).then(
-      (res) => {
-        if (data?.results) {
-          setData({
-            ...data,
-            results: [...data?.results, ...res.results],
-          });
-        } else {
-          setData(res);
-        }
-        setPageNum((prev) => prev + 1);
+    fetchDataFromApi(`/discover/${mediaType}`, filters).then((res) => {
+      console.log(res);
+      if (data?.results) {
+        setData({
+          ...res,
+          results: [...data?.results, ...res.results],
+        });
+      } else {
+        setData(res);
       }
-    );
+      setPageNum((prev) => prev + 1);
+    });
   };
 
   useEffect(() => {

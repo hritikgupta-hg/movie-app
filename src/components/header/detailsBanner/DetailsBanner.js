@@ -18,6 +18,7 @@ const DetailsBanner = ({ video, crew }) => {
   const [show, setShow] = useState(false);
   const [videoId, setVideoId] = useState(null);
 
+  console.log(video);
   const directors = crew?.filter((member) => member.job === "Director");
   const writers = crew?.filter(
     (member) =>
@@ -69,16 +70,18 @@ const DetailsBanner = ({ video, crew }) => {
                 <Genres genre_ids={_genres} />
                 <div className="row">
                   <CircleRating rating={data.vote_average.toFixed(1)} />
-                  <div
-                    className="playbtn"
-                    onClick={() => {
-                      setShow(true);
-                      setVideoId(video.key);
-                    }}
-                  >
-                    <PlayIcon />
-                    <span className="text">Watch Trailer</span>
-                  </div>
+                  {video && (
+                    <div
+                      className="playbtn"
+                      onClick={() => {
+                        setShow(true);
+                        setVideoId(video.key);
+                      }}
+                    >
+                      <PlayIcon />
+                      <span className="text">Watch Trailer</span>
+                    </div>
+                  )}
                 </div>
 
                 <div className="overview">

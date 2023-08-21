@@ -30,10 +30,15 @@
 
   .logo {
     cursor: pointer;
-    img {
-      height: 50px;
-    }
+    // color: rgb(203, 144, 67);
+    font-size: 30px;
+    font-weight: 1000;
+    background: -webkit-linear-gradient(98.37deg, #f89e00 0.99%, #da2f68 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
   }
+
   .menuItems {
     list-style-type: none;
     display: none;

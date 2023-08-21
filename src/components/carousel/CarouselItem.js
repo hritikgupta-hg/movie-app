@@ -21,7 +21,7 @@ const CarouselItem = (props) => {
         <Genres genre_ids={props.genre_ids.slice(0, 2)} />
       </div>
       <div className="textBlock">
-        <span className="title">{props.title || props.name}</span>
+        <div className="name">{props.title || props.name}</div>
         <span className="date">
           {dayjs(props.release_Date).format("MMM D, YYYY")}
         </span>

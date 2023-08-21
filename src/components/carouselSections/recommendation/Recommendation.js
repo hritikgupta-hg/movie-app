@@ -8,14 +8,17 @@ const Recommendation = ({ mediaType, id }) => {
     `/${mediaType}/${id}/recommendations`
   );
 
-  return (
-    <Carousel
-      title="Recommendations"
-      data={data?.results}
-      loading={loading}
-      endpoint={mediaType}
-    />
-  );
+  console.log(data);
+  if (data?.results?.length > 0) {
+    return (
+      <Carousel
+        title="Recommendations"
+        data={data?.results}
+        loading={loading}
+        endpoint={mediaType}
+      />
+    );
+  }
 };
 
 export default Recommendation;

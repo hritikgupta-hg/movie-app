@@ -23,52 +23,51 @@ const VideosSection = ({ data, loading }) => {
     );
   };
 
-  return (
-    <div className="videosSection">
-      <ContentWrapper>
-        <div className="sectionHeading">
-          {data?.results?.length > 0 && "Official Videos"}
-        </div>
-        {!loading && data ? (
-          <div className="videos">
-            {data?.results?.map((video) => {
-              return (
-                <div
-                  key={video.id}
-                  className="videoItem"
-                  onClick={() => {
-                    setVideoId(video.key);
-                    setShow(true);
-                  }}
-                >
-                  <div className="videoThumbnail">
-                    <Img
-                      src={`https://img.youtube.com/vi/${video?.key}/mqdefault.jpg`}
-                    />
-                    <PlayIcon />
+  if (data?.results?.length > 0)
+    return (
+      <div className="videosSection">
+        <ContentWrapper>
+          <div className="sectionHeading">"Official Videos"</div>
+          {!loading && data ? (
+            <div className="videos">
+              {data?.results?.map((video) => {
+                return (
+                  <div
+                    key={video.id}
+                    className="videoItem"
+                    onClick={() => {
+                      setVideoId(video.key);
+                      setShow(true);
+                    }}
+                  >
+                    <div className="videoThumbnail">
+                      <Img
+                        src={`https://img.youtube.com/vi/${video?.key}/mqdefault.jpg`}
+                      />
+                      <PlayIcon />
+                    </div>
+                    <div className="videoTitle">{video?.name}</div>
                   </div>
-                  <div className="videoTitle">{video?.name}</div>
-                </div>
-              );
-            })}{" "}
-          </div>
-        ) : (
-          <div className="videoSkeleton">
-            {loadingSkeleton()}
-            {loadingSkeleton()}
-            {loadingSkeleton()}
-            {loadingSkeleton()}
-          </div>
-        )}
-      </ContentWrapper>
-      <VideoPopup
-        show={show}
-        setShow={setShow}
-        videoId={videoId}
-        setVideoId={setVideoId}
-      />
-    </div>
-  );
+                );
+              })}{" "}
+            </div>
+          ) : (
+            <div className="videoSkeleton">
+              {loadingSkeleton()}
+              {loadingSkeleton()}
+              {loadingSkeleton()}
+              {loadingSkeleton()}
+            </div>
+          )}
+        </ContentWrapper>
+        <VideoPopup
+          show={show}
+          setShow={setShow}
+          videoId={videoId}
+          setVideoId={setVideoId}
+        />
+      </div>
+    );
 };
 
 export default VideosSection;

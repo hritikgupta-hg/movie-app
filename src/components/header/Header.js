@@ -76,7 +76,7 @@ const Header = () => {
     <header className={`header ${mobileMenu ? "mobileView" : ""} ${show}`}>
       <ContentWrapper>
         <div className="logo" onClick={() => navigate("/")}>
-          <img src={logo} alt="logo" />
+          <div>MovieBOX</div>
         </div>
 
         <ul className="menuItems">
@@ -113,6 +113,7 @@ const Header = () => {
                 placeholder="Search for a movie or TV show"
                 onChange={(e) => setQuery(e.target.value)}
                 onKeyUp={searchQueryHandler}
+                autoFocus
               />
             </div>
             <VscChromeClose onClick={() => setShowSearch(false)} />

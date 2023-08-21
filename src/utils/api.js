@@ -7,7 +7,8 @@ const headers = { Authorization: "bearer " + TMDB_TOKEN };
 
 const fetchDataFromApi = async (url, params) => {
   url += "?" + new URLSearchParams(params).toString();
-  console.log(url);
+
+  // console.log(BASE_URL + url);
   try {
     const response = await fetch(BASE_URL + url, {
       headers,
